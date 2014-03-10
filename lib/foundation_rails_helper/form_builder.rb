@@ -21,11 +21,11 @@ module FoundationRailsHelper
 
 
     def check_box(attribute, options = {}, checked_value = "1", unchecked_value = "0")
-      custom_label(attribute, options[:label], options[:label_options]) do
-        options.delete(:label)
-        options.delete(:label_options)
-        super(attribute, options, checked_value, unchecked_value)
-      end + error_and_hint(attribute, options)
+      label = custom_label(attribute, options[:label], options[:label_options])
+      options.delete(:label)
+      options.delete(:label_options)
+      field = super(attribute, options, checked_value, unchecked_value)
+      field + label + error_and_hint(attribute, options)
     end
 
     def radio_button(attribute, tag_value, options = {})
